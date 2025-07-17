@@ -1,7 +1,7 @@
 <h1 align="center">✨ Jarvis: Your Smart Desktop Voice Assistant ✨</h1>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" width="300">
+  <img src="https://media1.tenor.com/m/VQmlsNcb4NwAAAAC/jarvis-jarvis-make-chat-shut-up.gif" width="300">
 </p>
 
 <p align="center">
