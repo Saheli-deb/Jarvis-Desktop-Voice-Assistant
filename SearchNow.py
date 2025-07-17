@@ -47,7 +47,7 @@ def searchGoogle(query):
         except:
             speak("No speakable output available")
 def searchYoutube(query):
-    if "youtube" in query:
+    if "search youtube" in query:
         speak("This is what I found for your search!") 
         query = query.replace("youtube search","")
         query = query.replace("youtube","")

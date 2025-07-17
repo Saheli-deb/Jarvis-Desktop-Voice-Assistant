@@ -16,6 +16,17 @@ import subprocess
 import pyautogui
 from INTRO import play_gif
 from dotenv import load_dotenv
+from fpdf import FPDF
+from scroll_control import scroll_up, scroll_down
+from battery import check_battery
+from generate_img import generate_image
+from handle_system import handle_system_command
+from youtube_automation import control_youtube
+from handle_system import handle_system_command
+from whatsapp_automation import send_whatsapp_message_auto
+from pptx import Presentation
+from pptx.util import Inches
+from docx import Document
 import os
 import openai
 load_dotenv()
@@ -94,7 +105,30 @@ def chat_with_gpt(prompt):
         return reply.strip()
     except Exception as e:
         return "Sorry, I couldn't connect to ChatGPT at the moment."
+def create_pdf(text, filename="chatbot_output.pdf"):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.multi_cell(200, 10, txt=text)
+    pdf.output(filename)
+    speak(f"PDF saved as {filename}")
 
+def create_word_doc(text, filename="chatbot_output.docx"):
+    doc = Document()
+    doc.add_paragraph(text)
+    doc.save(filename)
+    speak(f"Word document saved as {filename}")
+
+def create_ppt(text, filename="chatbot_output.pptx"):
+    prs = Presentation()
+    slide_layout = prs.slide_layouts[1]
+    slide = prs.slides.add_slide(slide_layout)
+    title = slide.shapes.title
+    content = slide.placeholders[1]
+    title.text = "Jarvis Presentation"
+    content.text = text
+    prs.save(filename)
+    speak(f"Presentation saved as {filename}")
 # alarm set 
 def alarm(query):
      timehere = open("Alarmtext.txt","a")
@@ -116,36 +150,6 @@ def get_weather(city="Delhi"):  # Default city is Delhi
         speak(f"The current temperature in {city} is {temp} degrees Celsius with {description}.")
     else:
         speak("Sorry, I couldn't fetch the weather details.")
-# whatsapp automation
-def send_whatsapp_message_auto():
-    speak("Who do you want to send a message to?")
-    contact = takeCommand().lower()
-
-    speak("What should I send?")
-    message = takeCommand()
-
-    # Open WhatsApp (Shortcut for Windows: Win + S, then search "WhatsApp")
-    pyautogui.hotkey('win', 's')
-    time.sleep(1)
-    pyautogui.write('WhatsApp')  # Type "WhatsApp"
-    time.sleep(1)
-    pyautogui.press('enter')  # Press Enter to open
-    time.sleep(5)  # Wait for WhatsApp to open
-
-    # Search for the contact
-    pyautogui.hotkey('ctrl', 'f')  # Open search bar
-    time.sleep(1)
-    pyautogui.write(contact)  # Type contact name
-    time.sleep(2)
-    pyautogui.press('enter')  # Open chat
-
-    # Type and send the message
-    time.sleep(2)
-    pyautogui.write(message)  # Type message
-    time.sleep(1)
-    pyautogui.press('enter')  # Send message
-
-    speak(f"Message sent to {contact}.")
 
 if __name__ == "__main__": 
      if check_password(): 
@@ -205,6 +209,20 @@ if __name__ == "__main__":
                 elif "mute" in query:
                  pyautogui.press("m")
                  speak("video muted")
+                elif "shutdown" in query or "restart" in query or "log off" in query:
+                  handle_system_command(query)
+                elif "youtube automation" in query:
+                    speak("What YouTube action should I perform?")
+                    action = takeCommand()
+                    control_youtube(action)
+                elif "seek forward" in query:
+                 control_youtube("seek forward")
+                elif "seek backward" in query:
+                    control_youtube("seek backward")
+                elif "increase speed" in query:
+                    control_youtube("increase speed")
+                elif "decrease speed" in query:
+                    control_youtube("decrease speed")
 
                 elif "volume up" in query:
                  from my_keyboard import volumeup
@@ -214,6 +232,13 @@ if __name__ == "__main__":
                  from my_keyboard import volumedown
                  speak("Turning volume down, sir")
                  volumedown()
+                elif "scroll up" in query:
+                  speak("scrolling up sir")
+                  scroll_up(20)
+
+                elif "scroll down" in query:
+                  speak("scrolling down sir")
+                  scroll_down(20)
 
                 elif "open" in query:
                   from Dictapp import openappweb
@@ -253,6 +278,8 @@ if __name__ == "__main__":
                         get_weather(city_query)  # Call function with user-specified city
                     else:
                         get_weather()  # Default to Delhi if no input
+                elif "battery" in query or "charge" in query or "battery percentage" in query:
+                     check_battery()
                 elif "set an alarm" in query:
                   print("input time example:- 10 and 10 and 10")
                   speak("Set the time")
@@ -284,10 +311,44 @@ if __name__ == "__main__":
                        break
                      elif user_query == "none":
                       continue
+                    #  else:
+                    #    response = chat_with_gpt(user_query)
+                    #    print("Jarvis ChatBot:", response)
+                    #    speak(response)
+                     elif "make a pdf" in user_query or "create a pdf" in user_query:
+                         if last_gpt_response:
+                           create_pdf(last_gpt_response)
+                         else:
+                          speak("I don't have anything to save yet. Ask something first.")
+
+                     elif "make a word" in user_query or "create word" in user_query:
+                          if last_gpt_response:
+                             create_word_doc(last_gpt_response)
+                          else:
+                              speak("I don't have anything to save yet. Ask something first.")
+
+                     elif "make a ppt" in user_query or "create presentation" in user_query:
+                          if last_gpt_response:
+                           create_ppt(last_gpt_response)
+                          else:
+                           speak("I don't have anything to save yet. Ask something first.")
+                     elif "generate content" in query:
+                            speak("What content do you want me to generate?")
+                            content_prompt = takeCommand()
+                            result = chat_with_gpt(content_prompt)
+                            print("Jarvis:", result)
+                            speak(result)
+
                      else:
-                       response = chat_with_gpt(user_query)
-                       print("Jarvis ChatBot:", response)
-                       speak(response)
+                        response = chat_with_gpt(user_query)
+                        last_gpt_response = response  # Save for export
+                        print("Jarvis ChatBot:", response)
+                        speak(response)
+                elif "generate image" in query or "make an image" in query:
+                    speak("What image do you want me to generate?")
+                    image_prompt = takeCommand()
+                    generate_image(image_prompt)
+
 
                 elif "calculate" in query:
                    from Calculatenumbers import WolfRamAlpha
