@@ -1,0 +1,45 @@
+# Core Jarvis Dependencies
+pyttsx3==2.90
+SpeechRecognition==3.10.0
+requests==2.31.0
+beautifulsoup4==4.12.2
+pyautogui==0.9.54
+pywhatkit==5.4
+python-dotenv==1.0.0
+fpdf==1.7.2
+python-pptx==0.6.21
+python-docx==0.8.11
+openai==0.28.1
+plyer==2.1.0
+
+# Advanced Features Dependencies
+psutil==5.9.5
+opencv-python==4.8.1.78
+numpy>=1.21.0
+matplotlib==3.7.2
+Pillow==10.0.0
+cryptography==41.0.4
+qrcode==7.4.2
+pyzbar==0.1.9
+# face-recognition==1.3.0  # Commented out due to installation issues
+# dlib==19.24.2  # Commented out due to installation issues
+# python-nmap==0.7.1  # Commented out - using ping-based scanning instead
+
+# Enhanced AI Features Dependencies
+openai>=1.0.0  # Updated for latest features
+requests>=2.31.0  # For image downloads
+Pillow>=10.0.0  # For image processing
+numpy>=1.21.0  # For numerical operations
+
+# Optional Dependencies (for enhanced features)
+# tkinter and winsound come with Python installation
+
+# New Advanced Features Dependencies
+# All new features use only standard Python libraries
+# No additional dependencies required for:
+# - AI Personality Modes
+# - Analytics Dashboard
+# - Voice Games
+# - Smart Scheduling
+# - Predictive Features
+# - Enhanced AI Features (uses OpenAI API) 

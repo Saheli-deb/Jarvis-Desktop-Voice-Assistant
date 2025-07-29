@@ -1,0 +1,207 @@
+{
+  "sessions": [],
+  "commands": [
+    {
+      "timestamp": "2025-07-30T02:42:36.286350",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:42:40.781719",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:43:01.033395",
+      "command": "sentiment analysis",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:43:59.395419",
+      "command": "jarvis ai research",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:04.284875",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:08.622672",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:16.240947",
+      "command": "the median of this research",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:20.572803",
+      "command": "the median of this research",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:51.124880",
+      "command": "translate",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:54.879685",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:44:59.216294",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:45:28.380051",
+      "command": "translate",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:45:32.630549",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:45:37.116999",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:45:43.574823",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:45:48.028364",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:25.127536",
+      "command": "jarvis start word",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:29.870155",
+      "command": "jarvis start word",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:33.660996",
+      "command": "word game",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:38.022987",
+      "command": "word game",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:44.750789",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:46:49.279754",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:08.450464",
+      "command": "start word game",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:17.419079",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:21.856654",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:28.182792",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:32.715155",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:36.121730",
+      "command": "dog",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:40.702078",
+      "command": "dog",
+      "success": true,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:47.745284",
+      "command": "None",
+      "success": false,
+      "response_time": null
+    },
+    {
+      "timestamp": "2025-07-30T02:47:52.181823",
+      "command": "None",
+      "success": true,
+      "response_time": null
+    }
+  ],
+  "system_performance": [],
+  "errors": [],
+  "personality_usage": {},
+  "daily_stats": {
+    "2025-07-30": {
+      "commands": 31,
+      "successful_commands": 18,
+      "failed_commands": 13,
+      "total_time": 0
+    }
+  },
+  "voice_recognition": {
+    "successful": 0,
+    "failed": 0,
+    "total": 0
+  }
+}

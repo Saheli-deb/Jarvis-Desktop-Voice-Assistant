@@ -406,6 +406,83 @@ class JarvisUI(ctk.CTk):
         ctk.CTkButton(export_panel, text="Export as PPT", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.export_ppt).pack(pady=10)
         self.panels["Export (PDF/Word/PPT)"] = export_panel
 
+        # Email panel
+        email_panel = ctk.CTkFrame(self.main_area, fg_color=JARVIS_PANEL, corner_radius=16)
+        email_panel.pack_propagate(False)
+        ctk.CTkLabel(email_panel, text="Email Assistant", font=JARVIS_LABEL_FONT, text_color=JARVIS_HIGHLIGHT).pack(pady=20)
+        self.email_recipient_entry = ctk.CTkEntry(email_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Recipient Email")
+        self.email_recipient_entry.pack(pady=5)
+        self.email_subject_entry = ctk.CTkEntry(email_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Subject")
+        self.email_subject_entry.pack(pady=5)
+        self.email_body_entry = ctk.CTkTextbox(email_panel, width=320, height=80, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8)
+        self.email_body_entry.pack(pady=5)
+        ctk.CTkButton(email_panel, text="Send Email", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.send_email_ui).pack(pady=10)
+        ctk.CTkButton(email_panel, text="Read Latest Emails", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.read_emails_ui).pack(pady=5)
+        self.email_result = ctk.CTkLabel(email_panel, text="", font=JARVIS_CONSOLE_FONT, text_color=JARVIS_TEXT)
+        self.email_result.pack(pady=10)
+        self.panels["Email"] = email_panel
+
+        # Calendar panel
+        calendar_panel = ctk.CTkFrame(self.main_area, fg_color=JARVIS_PANEL, corner_radius=16)
+        calendar_panel.pack_propagate(False)
+        ctk.CTkLabel(calendar_panel, text="Calendar Assistant", font=JARVIS_LABEL_FONT, text_color=JARVIS_HIGHLIGHT).pack(pady=20)
+        self.calendar_title_entry = ctk.CTkEntry(calendar_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Event Title")
+        self.calendar_title_entry.pack(pady=5)
+        self.calendar_date_entry = ctk.CTkEntry(calendar_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Date (MM/DD/YYYY)")
+        self.calendar_date_entry.pack(pady=5)
+        self.calendar_time_entry = ctk.CTkEntry(calendar_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Time (HH:MM) or leave empty for all day")
+        self.calendar_time_entry.pack(pady=5)
+        self.calendar_desc_entry = ctk.CTkTextbox(calendar_panel, width=320, height=60, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8)
+        self.calendar_desc_entry.pack(pady=5)
+        ctk.CTkButton(calendar_panel, text="Add Event", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.add_calendar_event).pack(pady=10)
+        ctk.CTkButton(calendar_panel, text="List Upcoming Events", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.list_calendar_events).pack(pady=5)
+        ctk.CTkButton(calendar_panel, text="Today's Events", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.get_today_events).pack(pady=5)
+        ctk.CTkButton(calendar_panel, text="Open System Calendar", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.open_system_calendar).pack(pady=5)
+        ctk.CTkButton(calendar_panel, text="Open Google Calendar", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.open_google_calendar).pack(pady=5)
+        ctk.CTkButton(calendar_panel, text="Add to Google Calendar", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.add_to_google_calendar).pack(pady=5)
+        self.calendar_result = ctk.CTkLabel(calendar_panel, text="", font=JARVIS_CONSOLE_FONT, text_color=JARVIS_TEXT)
+        self.calendar_result.pack(pady=10)
+        self.panels["Calendar"] = calendar_panel
+
+        # Reminders & Todos panel
+        reminders_panel = ctk.CTkFrame(self.main_area, fg_color=JARVIS_PANEL, corner_radius=16)
+        reminders_panel.pack_propagate(False)
+        ctk.CTkLabel(reminders_panel, text="Reminders & Todos", font=JARVIS_LABEL_FONT, text_color=JARVIS_HIGHLIGHT).pack(pady=20)
+        
+        # Reminder fields
+        ctk.CTkLabel(reminders_panel, text="Add Reminder:", font=JARVIS_CONSOLE_FONT, text_color=JARVIS_ACCENT).pack(pady=(0,5))
+        self.reminder_title_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Reminder Title")
+        self.reminder_title_entry.pack(pady=2)
+        self.reminder_date_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Due Date (MM/DD/YYYY) - optional")
+        self.reminder_date_entry.pack(pady=2)
+        self.reminder_priority_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Priority (high/medium/low) - default: medium")
+        self.reminder_priority_entry.pack(pady=2)
+        self.reminder_desc_entry = ctk.CTkTextbox(reminders_panel, width=320, height=40, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8)
+        self.reminder_desc_entry.pack(pady=2)
+        ctk.CTkButton(reminders_panel, text="Add Reminder", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.add_reminder).pack(pady=5)
+        
+        # Todo fields
+        ctk.CTkLabel(reminders_panel, text="Add Todo:", font=JARVIS_CONSOLE_FONT, text_color=JARVIS_ACCENT).pack(pady=(10,5))
+        self.todo_title_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Todo Title")
+        self.todo_title_entry.pack(pady=2)
+        self.todo_date_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Due Date (MM/DD/YYYY) - optional")
+        self.todo_date_entry.pack(pady=2)
+        self.todo_priority_entry = ctk.CTkEntry(reminders_panel, width=320, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8, placeholder_text="Priority (high/medium/low) - default: medium")
+        self.todo_priority_entry.pack(pady=2)
+        self.todo_desc_entry = ctk.CTkTextbox(reminders_panel, width=320, height=40, font=JARVIS_CONSOLE_FONT, fg_color=JARVIS_CONSOLE, text_color=JARVIS_TEXT, border_width=2, border_color=JARVIS_ACCENT, corner_radius=8)
+        self.todo_desc_entry.pack(pady=2)
+        ctk.CTkButton(reminders_panel, text="Add Todo", font=JARVIS_BTN_FONT, fg_color=JARVIS_HIGHLIGHT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.add_todo).pack(pady=5)
+        
+        # Action buttons
+        ctk.CTkButton(reminders_panel, text="List Reminders", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.list_reminders).pack(pady=5)
+        ctk.CTkButton(reminders_panel, text="List Todos", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.list_todos).pack(pady=5)
+        ctk.CTkButton(reminders_panel, text="Check Overdue", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.check_overdue).pack(pady=5)
+        ctk.CTkButton(reminders_panel, text="Test Notification", font=JARVIS_BTN_FONT, fg_color=JARVIS_ACCENT, text_color=JARVIS_BG, hover_color=JARVIS_BTN_ACTIVE, corner_radius=8, command=self.test_notification).pack(pady=5)
+        
+        self.reminders_result = ctk.CTkLabel(reminders_panel, text="", font=JARVIS_CONSOLE_FONT, text_color=JARVIS_TEXT)
+        self.reminders_result.pack(pady=10)
+        self.panels["Reminders & Todos"] = reminders_panel
+
     def show_panel(self, feature):
         for f, panel in self.panels.items():
             panel.place_forget()
@@ -556,6 +633,247 @@ class JarvisUI(ctk.CTk):
             jarvis_main.create_ppt(self.last_gpt_response)
             self.set_status("PPT exported.")
         threading.Thread(target=ppt_thread, daemon=True).start()
+
+    def send_email_ui(self):
+        import email_assistant
+        recipient = self.email_recipient_entry.get().strip()
+        subject = self.email_subject_entry.get().strip()
+        body = self.email_body_entry.get("1.0", "end").strip()
+        if not recipient or not subject or not body:
+            self.email_result.configure(text="Please fill all fields.")
+            return
+        self.set_status("Sending email...")
+        success = email_assistant.send_email(recipient, subject, body)
+        if success:
+            self.email_result.configure(text=f"Email sent to {recipient}.")
+        else:
+            self.email_result.configure(text="Failed to send email. Check setup.")
+        self.set_status("Ready")
+
+    def read_emails_ui(self):
+        import email_assistant
+        self.set_status("Fetching emails...")
+        emails = email_assistant.read_emails()
+        if not emails:
+            self.email_result.configure(text="No emails found or failed to fetch emails.")
+        else:
+            result = ""
+            for mail in emails:
+                result += f"From: {mail['from']}\nSubject: {mail['subject']}\n{mail['body'][:100]}\n---\n"
+            self.email_result.configure(text=result)
+        self.set_status("Ready")
+
+    def add_calendar_event(self):
+        import calendar_assistant
+        title = self.calendar_title_entry.get().strip()
+        date = self.calendar_date_entry.get().strip()
+        time = self.calendar_time_entry.get().strip()
+        description = self.calendar_desc_entry.get("1.0", "end").strip()
+        
+        if not title or not date:
+            self.calendar_result.configure(text="Please fill title and date.")
+            return
+            
+        self.set_status("Adding calendar event...")
+        success = calendar_assistant.add_event(title, date, time, description)
+        if success:
+            self.calendar_result.configure(text=f"Event '{title}' added successfully!")
+            # Clear fields
+            self.calendar_title_entry.delete(0, ctk.END)
+            self.calendar_date_entry.delete(0, ctk.END)
+            self.calendar_time_entry.delete(0, ctk.END)
+            self.calendar_desc_entry.delete("1.0", "end")
+        else:
+            self.calendar_result.configure(text="Failed to add event. Check date format (MM/DD/YYYY).")
+        self.set_status("Ready")
+
+    def list_calendar_events(self):
+        import calendar_assistant
+        self.set_status("Fetching calendar events...")
+        events = calendar_assistant.list_events()
+        if events:
+            result = f"Found {len(events)} upcoming events:\n\n"
+            for event in events:
+                from datetime import datetime
+                event_date = datetime.fromisoformat(event['datetime'])
+                result += f"📌 {event['title']}\n"
+                result += f"   📅 {event_date.strftime('%B %d, %Y at %I:%M %p')}\n"
+                if event['description']:
+                    result += f"   📝 {event['description']}\n"
+                result += "---\n"
+        else:
+            result = "No upcoming events found."
+        self.calendar_result.configure(text=result)
+        self.set_status("Ready")
+
+    def get_today_events(self):
+        import calendar_assistant
+        self.set_status("Checking today's events...")
+        today_events = calendar_assistant.get_today_events()
+        if today_events:
+            result = f"You have {len(today_events)} events today:\n\n"
+            for event in today_events:
+                from datetime import datetime
+                event_date = datetime.fromisoformat(event['datetime'])
+                result += f"📌 {event['title']}\n"
+                result += f"   📅 {event_date.strftime('%I:%M %p')}\n"
+                if event['description']:
+                    result += f"   📝 {event['description']}\n"
+                result += "---\n"
+        else:
+            result = "No events scheduled for today."
+        self.calendar_result.configure(text=result)
+        self.set_status("Ready")
+
+    def open_system_calendar(self):
+        import calendar_assistant
+        self.set_status("Opening system calendar...")
+        success = calendar_assistant.open_system_calendar()
+        if success:
+            self.calendar_result.configure(text="✅ System calendar opened!")
+        else:
+            self.calendar_result.configure(text="❌ Failed to open system calendar.")
+        self.set_status("Ready")
+
+    def open_google_calendar(self):
+        import calendar_assistant
+        self.set_status("Opening Google Calendar...")
+        success = calendar_assistant.open_google_calendar()
+        if success:
+            self.calendar_result.configure(text="✅ Google Calendar opened in browser!")
+        else:
+            self.calendar_result.configure(text="❌ Failed to open Google Calendar.")
+        self.set_status("Ready")
+
+    def add_to_google_calendar(self):
+        import calendar_assistant
+        title = self.calendar_title_entry.get().strip()
+        date = self.calendar_date_entry.get().strip()
+        time = self.calendar_time_entry.get().strip()
+        description = self.calendar_desc_entry.get("1.0", "end").strip()
+        
+        if not title or not date:
+            self.calendar_result.configure(text="Please fill title and date first.")
+            return
+            
+        self.set_status("Opening Google Calendar with event...")
+        success = calendar_assistant.open_calendar_with_event(title, date, time, description)
+        if success:
+            self.calendar_result.configure(text=f"✅ Google Calendar opened with event: {title}")
+        else:
+            self.calendar_result.configure(text="❌ Failed to open Google Calendar with event.")
+        self.set_status("Ready")
+
+    def add_reminder(self):
+        import reminders_assistant
+        title = self.reminder_title_entry.get().strip()
+        due_date = self.reminder_date_entry.get().strip()
+        priority = self.reminder_priority_entry.get().strip() or "medium"
+        description = self.reminder_desc_entry.get("1.0", "end").strip()
+        
+        if not title:
+            self.reminders_result.configure(text="Please fill the reminder title.")
+            return
+            
+        self.set_status("Adding reminder...")
+        success = reminders_assistant.add_reminder(title, due_date, priority, description)
+        if success:
+            self.reminders_result.configure(text=f"✅ Reminder '{title}' added successfully!")
+            # Clear fields
+            self.reminder_title_entry.delete(0, ctk.END)
+            self.reminder_date_entry.delete(0, ctk.END)
+            self.reminder_priority_entry.delete(0, ctk.END)
+            self.reminder_desc_entry.delete("1.0", "end")
+        else:
+            self.reminders_result.configure(text="❌ Failed to add reminder. Check date format (MM/DD/YYYY).")
+        self.set_status("Ready")
+
+    def add_todo(self):
+        import reminders_assistant
+        title = self.todo_title_entry.get().strip()
+        due_date = self.todo_date_entry.get().strip()
+        priority = self.todo_priority_entry.get().strip() or "medium"
+        description = self.todo_desc_entry.get("1.0", "end").strip()
+        
+        if not title:
+            self.reminders_result.configure(text="Please fill the todo title.")
+            return
+            
+        self.set_status("Adding todo...")
+        success = reminders_assistant.add_todo(title, priority, description, due_date)
+        if success:
+            self.reminders_result.configure(text=f"✅ Todo '{title}' added successfully!")
+            # Clear fields
+            self.todo_title_entry.delete(0, ctk.END)
+            self.todo_date_entry.delete(0, ctk.END)
+            self.todo_priority_entry.delete(0, ctk.END)
+            self.todo_desc_entry.delete("1.0", "end")
+        else:
+            self.reminders_result.configure(text="❌ Failed to add todo.")
+        self.set_status("Ready")
+
+    def list_reminders(self):
+        import reminders_assistant
+        self.set_status("Fetching reminders...")
+        reminders = reminders_assistant.list_reminders()
+        if reminders:
+            result = f"Found {len(reminders)} active reminders:\n\n"
+            for reminder in reminders:
+                result += f"⏰ {reminder['title']}\n"
+                result += f"   ⚡ Priority: {reminder['priority']}\n"
+                if reminder['due_date']:
+                    from datetime import datetime
+                    due_date = datetime.fromisoformat(reminder['due_date'])
+                    result += f"   📅 Due: {due_date.strftime('%B %d, %Y')}\n"
+                if reminder['description']:
+                    result += f"   📝 {reminder['description']}\n"
+                result += "---\n"
+        else:
+            result = "No active reminders found."
+        self.reminders_result.configure(text=result)
+        self.set_status("Ready")
+
+    def list_todos(self):
+        import reminders_assistant
+        self.set_status("Fetching todos...")
+        todos = reminders_assistant.list_todos()
+        if todos:
+            result = f"Found {len(todos)} active todos:\n\n"
+            for todo in todos:
+                result += f"⏳ {todo['title']}\n"
+                result += f"   ⚡ Priority: {todo['priority']}\n"
+                if todo['description']:
+                    result += f"   📝 {todo['description']}\n"
+                result += "---\n"
+        else:
+            result = "No active todos found."
+        self.reminders_result.configure(text=result)
+        self.set_status("Ready")
+
+    def check_overdue(self):
+        import reminders_assistant
+        self.set_status("Checking overdue reminders...")
+        overdue = reminders_assistant.get_overdue_reminders()
+        if overdue:
+            result = f"Found {len(overdue)} overdue reminders:\n\n"
+            for reminder in overdue:
+                result += f"🔴 OVERDUE: {reminder['title']}\n"
+                if reminder['due_date']:
+                    from datetime import datetime
+                    due_date = datetime.fromisoformat(reminder['due_date'])
+                    result += f"   📅 Was due: {due_date.strftime('%B %d, %Y')}\n"
+                result += "---\n"
+        else:
+            result = "No overdue reminders found."
+        self.reminders_result.configure(text=result)
+        self.set_status("Ready")
+
+    def test_notification(self):
+        import reminders_assistant
+        self.set_status("Testing notification...")
+        reminders_assistant.test_notification()
+        self.reminders_result.configure(text="✅ Test notification sent! Check your desktop.")
+        self.set_status("Ready")
 
     def set_status(self, text):
         self.status_label.configure(text=text)
