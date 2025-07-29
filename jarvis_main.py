@@ -1,5 +1,6 @@
              
 import pyttsx3
+from gesture_control import start_gesture_control
 import speech_recognition
 import requests
 from bs4 import BeautifulSoup
@@ -223,6 +224,22 @@ if __name__ == "__main__":
                     control_youtube("increase speed")
                 elif "decrease speed" in query:
                     control_youtube("decrease speed")
+
+                elif "gesture control" in query or "enable gesture control" in query:
+                        speak("Activating gesture control mode. Here's what you can do:")
+                        print("""\n
+                        ================= GESTURE CONTROL MENU =================
+                        Finger Count |     Action
+                        -------------|-----------------------
+                            1        | Play / Pause
+                            2        | Volume Up
+                            3        | Volume Down
+                            4        | Scroll Up
+                            5        | Scroll Down
+                        ========================================================
+                        """)
+                        start_gesture_control()
+                        speak("Gesture control session ended.")
 
                 elif "volume up" in query:
                  from my_keyboard import volumeup
